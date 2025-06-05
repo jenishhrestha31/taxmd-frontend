@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "graphql.vscode-graphql",
+    "orta.vscode-jest",
+    "ms-azuretools.vscode-docker"
+  ]
+}
