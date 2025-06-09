@@ -1,0 +1,44 @@
+# CI pipeline to lint, format-check, build, and test Next.js app
+name: Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ✅ Step 1: Checkout repo code
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v3
+
+      # ✅ Step 2: Set up Node.js and cache Yarn
+      - name: 🧶 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      # ✅ Step 3: Install dependencies
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # ✅ Step 4: Run Prettier check (fail if formatting is off)
+      - name: 🎨 Check formatting
+        run: yarn format:check
+
+      # ✅ Step 5: Lint with ESLint
+      - name: ✅ Lint code
+        run: yarn lint
+
+      # ✅ Step 6: Build the project
+      - name: 🏗️ Build project
+        run: yarn build
+
+      # ✅ Step 7: Run unit/component tests
+      - name: 🧪 Run tests
+        run: yarn test
